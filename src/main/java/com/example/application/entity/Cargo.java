@@ -42,7 +42,7 @@ public class Cargo {
     @ManyToOne
     @JoinColumn(name = "car_type_id")
     private CarType transportationCar;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable
     private Set<Service> services;
 

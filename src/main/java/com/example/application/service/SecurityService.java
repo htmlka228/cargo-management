@@ -1,5 +1,6 @@
 package com.example.application.service;
 
+import com.example.application.entity.User;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.server.VaadinServletRequest;
 import org.springframework.security.core.context.SecurityContext;
@@ -12,12 +13,12 @@ import org.springframework.stereotype.Service;
 public class SecurityService {
     private static final String LOGOUT_SUCCESS_URL = "/";
 
-    public UserDetails getAuthenticatedUser() {
+    public User getAuthenticatedUser() {
         SecurityContext context = SecurityContextHolder.getContext();
         Object principal = context.getAuthentication().getPrincipal();
 
-        if (principal instanceof UserDetails) {
-            return (UserDetails) context.getAuthentication().getPrincipal();
+        if (principal instanceof User) {
+            return (User) context.getAuthentication().getPrincipal();
         }
 
         return null;

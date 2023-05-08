@@ -22,7 +22,7 @@ public class CarType {
     private String name;
     private int maxWeight;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable
     private Set<ItemType> allowedItemTypes;
 }
