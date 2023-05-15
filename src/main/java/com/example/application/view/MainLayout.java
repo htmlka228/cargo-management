@@ -40,7 +40,8 @@ public class MainLayout extends AppLayout {
     }
 
     private void createDrawer() {
-        RouterLink mainLink = new RouterLink("Main page", MainView.class);
+        RouterLink mainLink = new RouterLink("Главная", MainView.class);
+        RouterLink cargosLink = new RouterLink("Грузы", CargoView.class);
         RouterLink customersLink = new RouterLink("Клиенты", CustomerView.class);
         RouterLink companiesLink = new RouterLink("Компании-партнёры", CompanyView.class);
         RouterLink cargoStatusesLink = new RouterLink("Статусы груза", CargoStatusView.class);
@@ -54,6 +55,7 @@ public class MainLayout extends AppLayout {
 
         addToDrawer(new VerticalLayout(
                 mainLink,
+                cargosLink,
                 customersLink,
                 companiesLink,
                 cargoStatusesLink,

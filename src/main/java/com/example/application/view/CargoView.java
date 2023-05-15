@@ -1,7 +1,7 @@
 package com.example.application.view;
 
-import com.example.application.entity.Role;
-import com.example.application.repository.RoleRepository;
+import com.example.application.entity.Cargo;
+import com.example.application.repository.CargoRepository;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -18,17 +18,17 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@PageTitle("Роли пользователей")
-@Route(value = "roles", layout = MainLayout.class)
+@PageTitle("Грузы")
+@Route(value = "cargos", layout = MainLayout.class)
 @RequiredArgsConstructor
 @PermitAll
-public class RoleView extends VerticalLayout {
-    private final RoleRepository roleRepository;
+public class CargoView extends VerticalLayout {
+    private final CargoRepository cargoRepository;
 
-    private final Grid<Role> cargoServiceGrid = new Grid<>(Role.class, false);
-    private final TextField filter = new TextField("", "Поиск роли");
-    private final Button addNewBtn = new Button("Добавить новую роль");
-    private final Button changeBtn = new Button("Изменить свойства роли");
+    private final Grid<Cargo> cargoServiceGrid = new Grid<>(Cargo.class, false);
+    private final TextField filter = new TextField("", "Поиск груза");
+    private final Button addNewBtn = new Button("Создать новый груз");
+    private final Button changeBtn = new Button("Изменить свойства груза");
     private final HorizontalLayout toolbar = new HorizontalLayout(filter, addNewBtn, changeBtn);
 
     @PostConstruct
@@ -46,23 +46,25 @@ public class RoleView extends VerticalLayout {
     }
 
     private void show(String filter) {
-        List<Role> roles = roleRepository.findAll();
+        List<Cargo> cargos = cargoRepository.findAll();
 
         if (StringUtils.isNotBlank(filter)) {
-            roles = roles.stream()
-                    .filter(role -> StringUtils.containsIgnoreCase(String.valueOf(role.getId()), filter)
-                            || StringUtils.containsIgnoreCase(role.getName(), filter)
-                            || StringUtils.containsIgnoreCase(role.getDescription(), filter)
+            cargos = cargos.stream()
+                    .filter(cargo -> StringUtils.containsIgnoreCase(cargo.getId().toString(), filter)
+                            || StringUtils.containsIgnoreCase(cargo.getCargoIndex(), filter)
+                            || StringUtils.containsIgnoreCase(String.valueOf(cargo.getTotalPrice()), filter)
+                            || StringUtils.containsIgnoreCase(cargo.getLocationFrom(), filter)
+                            || StringUtils.containsIgnoreCase(cargo.getLocationTo(), filter)
                     )
                     .collect(Collectors.toList());
         }
 
-        cargoServiceGrid.setItems(roles);
+        cargoServiceGrid.setItems(cargos);
     }
 
     private void configureGrid() {
         cargoServiceGrid.setSizeFull();
-        cargoServiceGrid.setColumns("id", "name", "description");
+        cargoServiceGrid.setColumns("id", "cargoIndex", "totalPrice", "locationFrom", "locationTo", "sourceCompany", "customer", "currentStatus", "currency", "transportationCar", "cargoServices", "createdAt", "updatedAt");
     }
 
     private void addButtonListeners() {
