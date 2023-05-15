@@ -44,7 +44,7 @@ public class Cargo {
     private CarType transportationCar;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable
-    private Set<Service> services;
+    private Set<CargoService> cargoServices;
 
     @CreatedDate
     private LocalDateTime createdAt;

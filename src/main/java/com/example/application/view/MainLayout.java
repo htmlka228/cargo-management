@@ -41,10 +41,28 @@ public class MainLayout extends AppLayout {
 
     private void createDrawer() {
         RouterLink mainLink = new RouterLink("Main page", MainView.class);
+        RouterLink customersLink = new RouterLink("Клиенты", CustomerView.class);
+        RouterLink companiesLink = new RouterLink("Компании-партнёры", CompanyView.class);
+        RouterLink cargoStatusesLink = new RouterLink("Статусы груза", CargoStatusView.class);
+        RouterLink cargoServicesLink = new RouterLink("Сервисы для груза", CargoServiceView.class);
+        RouterLink carTypesLink = new RouterLink("Типы машин", CarTypesView.class);
+        RouterLink itemTypes = new RouterLink("Типы предметов", ItemTypeView.class);
+        RouterLink currenciesLink = new RouterLink("Валюты", CurrencyView.class);
+        RouterLink usersLink = new RouterLink("Пользователи", InternalUserView.class);
+        RouterLink rolesLink = new RouterLink("Роли", RoleView.class);
         mainLink.setHighlightCondition(HighlightConditions.sameLocation());
 
         addToDrawer(new VerticalLayout(
-                mainLink
+                mainLink,
+                customersLink,
+                companiesLink,
+                cargoStatusesLink,
+                cargoServicesLink,
+                carTypesLink,
+                itemTypes,
+                currenciesLink,
+                usersLink,
+                rolesLink
         ));
     }
 }

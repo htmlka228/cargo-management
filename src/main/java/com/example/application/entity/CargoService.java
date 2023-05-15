@@ -9,20 +9,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Table(name = "service")
-public class Service {
+public class CargoService {
     @Id
     @GeneratedValue
     private Long id;
-    private String name;
     private String code;
+    private String name;
     private Integer price;
     private String description;
 }
