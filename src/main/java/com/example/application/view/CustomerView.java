@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class CustomerView extends VerticalLayout {
     private final CustomerRepository customerRepository;
 
-    private final Grid<Customer> cargoServiceGrid = new Grid<>(Customer.class, false);
+    private final Grid<Customer> customerGrid = new Grid<>(Customer.class, false);
     private final TextField filter = new TextField("", "Поиск клиента");
     private final Button addNewBtn = new Button("Добавить нового клиента");
     private final Button changeBtn = new Button("Изменить данные клиента");
@@ -36,7 +36,7 @@ public class CustomerView extends VerticalLayout {
         setSizeFull();
         configureGrid();
         addButtonListeners();
-        add(toolbar, cargoServiceGrid);
+        add(toolbar, customerGrid);
 
         show();
     }
@@ -61,12 +61,18 @@ public class CustomerView extends VerticalLayout {
                     .collect(Collectors.toList());
         }
 
-        cargoServiceGrid.setItems(customers);
+        customerGrid.setItems(customers);
     }
 
     private void configureGrid() {
-        cargoServiceGrid.setSizeFull();
-        cargoServiceGrid.setColumns("id", "lastname", "firstname", "patronymic", "address", "phone", "additionalPhone");
+        customerGrid.setSizeFull();
+        customerGrid.addColumn("id").setAutoWidth(true);
+        customerGrid.addColumn("lastname").setHeader("Фамилия").setAutoWidth(true);
+        customerGrid.addColumn("firstname").setHeader("Имя").setAutoWidth(true);
+        customerGrid.addColumn("patronymic").setHeader("Отчество").setAutoWidth(true);
+        customerGrid.addColumn("address").setHeader("Адрес доставки").setAutoWidth(true);
+        customerGrid.addColumn("phone").setHeader("Телефон").setAutoWidth(true);
+        customerGrid.addColumn("additionalPhone").setHeader("Дополнительный телефон").setAutoWidth(true);
     }
 
     private void addButtonListeners() {

@@ -1,5 +1,6 @@
 package com.example.application.view;
 
+import com.example.application.entity.Role;
 import com.example.application.entity.User;
 import com.example.application.repository.UserRepository;
 import com.vaadin.flow.component.button.Button;
@@ -25,7 +26,7 @@ import java.util.stream.Collectors;
 public class InternalUserView extends VerticalLayout {
     private final UserRepository userRepository;
 
-    private final Grid<User> cargoServiceGrid = new Grid<>(User.class, false);
+    private final Grid<User> userGrid = new Grid<>(User.class, false);
     private final TextField filter = new TextField("", "Поиск пользователя");
     private final Button addNewBtn = new Button("Добавить нового пользователя");
     private final Button changeBtn = new Button("Изменить свойства пользователя");
@@ -36,7 +37,7 @@ public class InternalUserView extends VerticalLayout {
         setSizeFull();
         configureGrid();
         addButtonListeners();
-        add(toolbar, cargoServiceGrid);
+        add(toolbar, userGrid);
 
         show();
     }
@@ -52,7 +53,6 @@ public class InternalUserView extends VerticalLayout {
             users = users.stream()
                     .filter(user -> StringUtils.containsIgnoreCase(user.getId().toString(), filter)
                             || StringUtils.containsIgnoreCase(user.getUsername(), filter)
-                            || StringUtils.containsIgnoreCase(user.getPassword(), filter)
                             || StringUtils.containsIgnoreCase(user.getFirstname(), filter)
                             || StringUtils.containsIgnoreCase(user.getLastname(), filter)
                             || StringUtils.containsIgnoreCase(user.getPatronymic(), filter)
@@ -61,12 +61,17 @@ public class InternalUserView extends VerticalLayout {
                     .collect(Collectors.toList());
         }
 
-        cargoServiceGrid.setItems(users);
+        userGrid.setItems(users);
     }
 
     private void configureGrid() {
-        cargoServiceGrid.setSizeFull();
-        cargoServiceGrid.setColumns("id", "username", "password", "firstname", "lastname", "patronymic", "roles");
+        userGrid.setSizeFull();
+        userGrid.addColumn("id").setAutoWidth(true);
+        userGrid.addColumn("username").setHeader("Логин").setAutoWidth(true);
+        userGrid.addColumn("lastname").setHeader("Фамилия").setAutoWidth(true);
+        userGrid.addColumn("firstname").setHeader("Имя").setAutoWidth(true);
+        userGrid.addColumn("patronymic").setHeader("Отчество").setAutoWidth(true);
+        userGrid.addColumn(user -> user.getRoles().stream().map(Role::getName).collect(Collectors.toSet())).setHeader("Роли").setAutoWidth(true);
     }
 
     private void addButtonListeners() {

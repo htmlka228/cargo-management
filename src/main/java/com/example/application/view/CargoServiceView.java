@@ -64,7 +64,11 @@ public class CargoServiceView extends VerticalLayout {
 
     private void configureGrid() {
         cargoServiceGrid.setSizeFull();
-        cargoServiceGrid.setColumns("id", "code", "name", "price", "description");
+        cargoServiceGrid.addColumn("id").setAutoWidth(true);
+        cargoServiceGrid.addColumn("code").setHeader("Код сервиса").setAutoWidth(true);
+        cargoServiceGrid.addColumn("name").setHeader("Название сервиса").setAutoWidth(true);
+        cargoServiceGrid.addColumn("price").setHeader("Цена").setAutoWidth(true);
+        cargoServiceGrid.addColumn("description").setHeader("Описание").setAutoWidth(true);
     }
 
     private void addButtonListeners() {

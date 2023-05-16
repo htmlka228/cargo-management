@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class RoleView extends VerticalLayout {
     private final RoleRepository roleRepository;
 
-    private final Grid<Role> cargoServiceGrid = new Grid<>(Role.class, false);
+    private final Grid<Role> roleGrid = new Grid<>(Role.class, false);
     private final TextField filter = new TextField("", "Поиск роли");
     private final Button addNewBtn = new Button("Добавить новую роль");
     private final Button changeBtn = new Button("Изменить свойства роли");
@@ -36,7 +36,7 @@ public class RoleView extends VerticalLayout {
         setSizeFull();
         configureGrid();
         addButtonListeners();
-        add(toolbar, cargoServiceGrid);
+        add(toolbar, roleGrid);
 
         show();
     }
@@ -57,12 +57,14 @@ public class RoleView extends VerticalLayout {
                     .collect(Collectors.toList());
         }
 
-        cargoServiceGrid.setItems(roles);
+        roleGrid.setItems(roles);
     }
 
     private void configureGrid() {
-        cargoServiceGrid.setSizeFull();
-        cargoServiceGrid.setColumns("id", "name", "description");
+        roleGrid.setSizeFull();
+        roleGrid.addColumn("id").setAutoWidth(true);
+        roleGrid.addColumn("name").setHeader("Название роли").setAutoWidth(true);
+        roleGrid.addColumn("description").setHeader("Описание роли").setAutoWidth(true);
     }
 
     private void addButtonListeners() {

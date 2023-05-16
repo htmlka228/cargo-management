@@ -62,7 +62,9 @@ public class CurrencyView extends VerticalLayout {
 
     private void configureGrid() {
         currencyGrid.setSizeFull();
-        currencyGrid.setColumns("id", "code", "country");
+        currencyGrid.addColumn("id").setAutoWidth(true);
+        currencyGrid.addColumn("code").setHeader("Код валюты").setAutoWidth(true);
+        currencyGrid.addColumn("country").setHeader("Страна").setAutoWidth(true);
     }
 
     private void addButtonListeners() {

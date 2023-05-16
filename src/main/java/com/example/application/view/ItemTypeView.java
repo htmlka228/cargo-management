@@ -63,7 +63,10 @@ public class ItemTypeView extends VerticalLayout {
 
     private void configureGrid() {
         cargoServiceGrid.setSizeFull();
-        cargoServiceGrid.setColumns("id", "code", "name", "description");
+        cargoServiceGrid.addColumn("id").setAutoWidth(true);
+        cargoServiceGrid.addColumn("code").setHeader("Код типа предмета").setAutoWidth(true);
+        cargoServiceGrid.addColumn("name").setHeader("Тип предмета").setAutoWidth(true);
+        cargoServiceGrid.addColumn("description").setHeader("Описание типа предмета").setAutoWidth(true);
     }
 
     private void addButtonListeners() {

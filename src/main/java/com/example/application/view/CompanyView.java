@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class CompanyView extends VerticalLayout {
     private final CompanyRepository companyRepository;
 
-    private final Grid<Company> cargoServiceGrid = new Grid<>(Company.class, false);
+    private final Grid<Company> companyGrid = new Grid<>(Company.class, false);
     private final TextField filter = new TextField("", "Поиск компаний");
     private final Button addNewBtn = new Button("Добавить новую компанию-партнёра");
     private final Button changeBtn = new Button("Изменить свойства выбранной компании");
@@ -36,7 +36,7 @@ public class CompanyView extends VerticalLayout {
         setSizeFull();
         configureGrid();
         addButtonListeners();
-        add(toolbar, cargoServiceGrid);
+        add(toolbar, companyGrid);
 
         show();
     }
@@ -64,12 +64,21 @@ public class CompanyView extends VerticalLayout {
                     .collect(Collectors.toList());
         }
 
-        cargoServiceGrid.setItems(companies);
+        companyGrid.setItems(companies);
     }
 
     private void configureGrid() {
-        cargoServiceGrid.setSizeFull();
-        cargoServiceGrid.setColumns("id", "code", "name", "phone", "email", "country", "address", "zipcode", "inn", "kpp");
+        companyGrid.setSizeFull();
+        companyGrid.addColumn("id").setAutoWidth(true);
+        companyGrid.addColumn("code").setHeader("Код компании").setAutoWidth(true);
+        companyGrid.addColumn("name").setHeader("Название компании").setAutoWidth(true);
+        companyGrid.addColumn("phone").setHeader("Телефон").setAutoWidth(true);
+        companyGrid.addColumn("email").setHeader("Электронная почта").setAutoWidth(true);
+        companyGrid.addColumn("country").setHeader("Страна").setAutoWidth(true);
+        companyGrid.addColumn("address").setHeader("Адрес").setAutoWidth(true);
+        companyGrid.addColumn("zipcode").setHeader("Почтовый индекс").setAutoWidth(true);
+        companyGrid.addColumn("inn").setHeader("ИНН").setAutoWidth(true);
+        companyGrid.addColumn("kpp").setHeader("КПП").setAutoWidth(true);
     }
 
     private void addButtonListeners() {

@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class CargoStatusView extends VerticalLayout {
     private final CargoStatusRepository cargoStatusRepository;
 
-    private final Grid<CargoStatus> cargoServiceGrid = new Grid<>(CargoStatus.class, false);
+    private final Grid<CargoStatus> cargoStatusGrid = new Grid<>(CargoStatus.class, false);
     private final TextField filter = new TextField("", "Поиск статуса");
     private final Button addNewBtn = new Button("Добавить новый статус");
     private final Button changeBtn = new Button("Изменить свойства статуса");
@@ -36,7 +36,7 @@ public class CargoStatusView extends VerticalLayout {
         setSizeFull();
         configureGrid();
         addButtonListeners();
-        add(toolbar, cargoServiceGrid);
+        add(toolbar, cargoStatusGrid);
 
         show();
     }
@@ -58,12 +58,15 @@ public class CargoStatusView extends VerticalLayout {
                     .collect(Collectors.toList());
         }
 
-        cargoServiceGrid.setItems(cargoStatuses);
+        cargoStatusGrid.setItems(cargoStatuses);
     }
 
     private void configureGrid() {
-        cargoServiceGrid.setSizeFull();
-        cargoServiceGrid.setColumns("id", "statusCode", "statusName", "description");
+        cargoStatusGrid.setSizeFull();
+        cargoStatusGrid.addColumn("id").setAutoWidth(true);
+        cargoStatusGrid.addColumn("statusCode").setHeader("Код статуса").setAutoWidth(true);
+        cargoStatusGrid.addColumn("statusName").setHeader("Название статуса").setAutoWidth(true);
+        cargoStatusGrid.addColumn("description").setHeader("Описание").setAutoWidth(true);
     }
 
     private void addButtonListeners() {

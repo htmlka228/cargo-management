@@ -49,7 +49,7 @@ create table if not exists customer
     lastname         varchar(255) not null,
     firstname        varchar(255) not null,
     patronymic       varchar(255) not null,
-    full_name        varchar(255),
+    full_name        varchar(255) not null,
     name_initials    varchar(255),
     phone            varchar(255) not null,
     additional_phone varchar(255),

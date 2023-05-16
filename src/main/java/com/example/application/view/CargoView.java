@@ -15,7 +15,9 @@ import jakarta.annotation.security.PermitAll;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @PageTitle("Грузы")
@@ -25,7 +27,7 @@ import java.util.stream.Collectors;
 public class CargoView extends VerticalLayout {
     private final CargoRepository cargoRepository;
 
-    private final Grid<Cargo> cargoServiceGrid = new Grid<>(Cargo.class, false);
+    private final Grid<Cargo> cargoGrid = new Grid<>(Cargo.class, false);
     private final TextField filter = new TextField("", "Поиск груза");
     private final Button addNewBtn = new Button("Создать новый груз");
     private final Button changeBtn = new Button("Изменить свойства груза");
@@ -36,7 +38,7 @@ public class CargoView extends VerticalLayout {
         setSizeFull();
         configureGrid();
         addButtonListeners();
-        add(toolbar, cargoServiceGrid);
+        add(toolbar, cargoGrid);
 
         show();
     }
@@ -59,12 +61,21 @@ public class CargoView extends VerticalLayout {
                     .collect(Collectors.toList());
         }
 
-        cargoServiceGrid.setItems(cargos);
+        cargoGrid.setItems(cargos);
     }
 
     private void configureGrid() {
-        cargoServiceGrid.setSizeFull();
-        cargoServiceGrid.setColumns("id", "cargoIndex", "totalPrice", "locationFrom", "locationTo", "sourceCompany", "customer", "currentStatus", "currency", "transportationCar", "cargoServices", "createdAt", "updatedAt");
+        cargoGrid.setSizeFull();
+        cargoGrid.addColumn("id").setAutoWidth(true);
+        cargoGrid.addColumn("cargoIndex").setHeader("Индекс груза").setAutoWidth(true);
+        cargoGrid.addColumn("totalPrice").setHeader("Стоимость").setAutoWidth(true);
+        cargoGrid.addColumn(cargo -> cargo.getCustomer().getFullName()).setHeader("Клиент").setAutoWidth(true);
+        cargoGrid.addColumn(cargo -> cargo.getCurrentStatus().getStatusCode()).setHeader("Статус груза").setAutoWidth(true);
+        cargoGrid.addColumn(cargo -> cargo.getCurrency().getCode()).setHeader("Валюта").setAutoWidth(true);
+        cargoGrid.addColumn(cargo -> cargo.getCreatedAt().format(DateTimeFormatter.ofPattern(
+                "dd MMMM yyyy HH:mm:ss",
+                new Locale("ru", "RU")))
+        ).setHeader("Дата создания").setAutoWidth(true);
     }
 
     private void addButtonListeners() {

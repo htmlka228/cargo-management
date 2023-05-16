@@ -39,9 +39,9 @@ insert into car_type_allowed_item_types (car_type_id, allowed_item_types_id) VAL
 insert into car_type_allowed_item_types (car_type_id, allowed_item_types_id) VALUES (3, 1);
 
 insert into customer (id, firstname, lastname, patronymic, full_name, name_initials, phone, additional_phone, address)
-VALUES ('02e04cb0-52c0-47c3-9fc0-d5c8ca9d842b', 'Иван', 'Иванов', 'Иванович', null, null, '89001002003', null, null);
+VALUES ('02e04cb0-52c0-47c3-9fc0-d5c8ca9d842b', 'Иван', 'Иванов', 'Иванович', 'Иванов Иван Иванович', null, '89001002003', null, null);
 insert into customer (id, firstname, lastname, patronymic, full_name, name_initials, phone, additional_phone, address)
-VALUES ('51b667c9-1a7c-4892-8569-c4a10b235e5c', 'Роман', 'Пушной', 'Романович', null, null, '88308575831', null, null);
+VALUES ('51b667c9-1a7c-4892-8569-c4a10b235e5c', 'Роман', 'Пушной', 'Романович', 'Пушной Роман Романович', null, '88308575831', null, null);
 
 insert into cargo (id, cargo_index, total_price, location_from, location_to, created_at, updated_at, currency_id, current_status_code, customer_id, source_company_id, car_type_id)
 VALUES ('fd1f370c-e7f8-47ab-b7d2-3e2a6e27c450', '7370450177', 3000, 'г.Москва, ул. Безымянная 18', 'г.Владивосток, ул. Морская 65', current_date, null, 1, 10, '02e04cb0-52c0-47c3-9fc0-d5c8ca9d842b', null, 1);

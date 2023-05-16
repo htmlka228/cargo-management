@@ -63,7 +63,10 @@ public class CarTypesView extends VerticalLayout {
 
     private void configureGrid() {
         carTypeGrid.setSizeFull();
-        carTypeGrid.setColumns("id", "code", "name", "maxWeight");
+        carTypeGrid.addColumn("id").setAutoWidth(true);
+        carTypeGrid.addColumn("code").setHeader("Код машины").setAutoWidth(true);
+        carTypeGrid.addColumn("name").setHeader("Тип машины").setAutoWidth(true);
+        carTypeGrid.addColumn("maxWeight").setHeader("Максимальная нагрузка").setAutoWidth(true);
     }
 
     private void addButtonListeners() {
