@@ -11,7 +11,7 @@ import jakarta.annotation.security.PermitAll;
 @PermitAll
 public class MainView extends VerticalLayout {
     public MainView() {
-        H1 helloText = new H1("Hello user. This is main view.");
+        H1 helloText = new H1("Приветствую пользователь. Вы вошли в систему");
         setSizeFull();
         add(helloText);
     }

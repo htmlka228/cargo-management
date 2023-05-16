@@ -66,7 +66,7 @@ public class CustomerView extends VerticalLayout {
 
     private void configureGrid() {
         cargoServiceGrid.setSizeFull();
-        cargoServiceGrid.setColumns("id", "firstname", "lastname", "patronymic", "address", "phone", "additionalPhone");
+        cargoServiceGrid.setColumns("id", "lastname", "firstname", "patronymic", "address", "phone", "additionalPhone");
     }
 
     private void addButtonListeners() {

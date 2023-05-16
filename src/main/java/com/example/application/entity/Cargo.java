@@ -43,7 +43,11 @@ public class Cargo {
     @JoinColumn(name = "car_type_id")
     private CarType transportationCar;
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable
+    @JoinTable(
+            name = "cargo_services",
+            joinColumns = @JoinColumn(name = "cargo_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "services_id", referencedColumnName = "id")
+    )
     private Set<CargoService> cargoServices;
 
     @CreatedDate

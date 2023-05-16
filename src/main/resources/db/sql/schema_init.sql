@@ -23,15 +23,15 @@ create table if not exists company
 (
     id      uuid not null default gen_random_uuid()
         primary key,
-    address varchar(255),
     code    varchar(255),
+    name    varchar(255),
     country varchar(255),
+    address varchar(255),
+    phone   varchar(255),
+    zipcode varchar(255),
     email   varchar(255),
     inn     varchar(255),
-    kpp     varchar(255),
-    name    varchar(255),
-    phone   varchar(255),
-    zipcode varchar(255)
+    kpp     varchar(255)
 );
 
 create table if not exists currency
@@ -44,41 +44,41 @@ create table if not exists currency
 
 create table if not exists customer
 (
-    id               uuid not null default gen_random_uuid()
+    id               uuid         not null default gen_random_uuid()
         primary key,
-    additional_phone varchar(255),
-    address          varchar(255),
-    firstname        varchar(255),
+    lastname         varchar(255) not null,
+    firstname        varchar(255) not null,
+    patronymic       varchar(255) not null,
     full_name        varchar(255),
-    lastname         varchar(255),
     name_initials    varchar(255),
-    patronymic       varchar(255),
-    phone            varchar(255)
+    phone            varchar(255) not null,
+    additional_phone varchar(255),
+    address          varchar(255)
 );
 
 create table if not exists cargo
 (
-    id                  uuid not null default gen_random_uuid()
+    id                  uuid         not null default gen_random_uuid()
         primary key,
-    cargo_index         varchar(255),
-    created_at          timestamp(6),
-    location_from       varchar(255),
-    location_to         varchar(255),
-    total_price         integer,
+    cargo_index         varchar(255) not null,
+    total_price         integer      not null,
+    location_from       varchar(255) not null,
+    location_to         varchar(255) not null,
+    created_at          timestamp(6) not null,
     updated_at          timestamp(6),
-    currency_id         bigint
+    currency_id         bigint       not null
         constraint fk6egmiys1t23fi1oyyvbbsq92u
             references currency,
-    current_status_code integer
+    current_status_code integer      not null
         constraint fk57fjk1nkncckm4babi40v58v0
             references cargo_status (status_code),
-    customer_id         uuid
+    customer_id         uuid         not null
         constraint fkrni7fkrrkjamxvj3hdanmet4d
             references customer,
     source_company_id   uuid
         constraint fk1yln6001wixajbwl9xhsxcl0n
             references company,
-    car_type_id         bigint
+    car_type_id         bigint       not null
         constraint fkijxi0yxpxqawwa1yb9gx1tsmw
             references car_type
 );

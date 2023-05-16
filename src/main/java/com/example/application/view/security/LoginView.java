@@ -22,7 +22,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
         login.setAction("login");
         login.setForgotPasswordButtonVisible(false);
 
-        add(new H1("RFLN Cargo Management"), login);
+        add(new H1("Cargo Management"), login);
     }
 
     @Override
